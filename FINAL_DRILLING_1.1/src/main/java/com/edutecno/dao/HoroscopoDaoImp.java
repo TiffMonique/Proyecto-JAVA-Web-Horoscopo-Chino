@@ -9,7 +9,7 @@ import java.util.List;
 import com.edutecno.modelo.Horoscopo;
 import com.edutecno.procesaconexion.AdministradorConexion;
 
-public class HoróscopoDaoImp extends AdministradorConexion implements HoróscopoDao {
+public class HoroscopoDaoImp extends AdministradorConexion implements HoroscopoDao {
 
 	public List<Horoscopo> obtenerHoroscopo() {
 		List<Horoscopo> horoscopo = new ArrayList<>();

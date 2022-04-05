@@ -2,6 +2,8 @@ package com.edutecno.servlets;
 
 import jakarta.servlet.ServletException;
 
+
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,12 +11,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.edutecno.dao.HoróscopoDaoImp;
+import com.edutecno.dao.HoroscopoDaoImp;
 import com.edutecno.dao.UsuariosDaoImp;
 import com.edutecno.modelo.Horoscopo;
 import com.edutecno.modelo.Usuarios;
@@ -67,35 +70,68 @@ public class crearUsuario extends HttpServlet {
 		String nombre= request.getParameter("nombre");
 		String username= request.getParameter("username");
 		String email = request.getParameter("email");
+		
 		String fecha_nacimiento = request.getParameter("fecha_nacimiento");
+		
 		String password = request.getParameter("password");
+	
 		
 		
-		/*response.setContentType("text/html");
-	    PrintWriter out = response.getWriter();
-
-	    out.println("<html>");
-	    out.println("<body>");
-	    out.println("<h1>Hola Mundo</h1>");
-	    out.println("</body>");
-	    out.println("</html>");*/
+		//fecha_nacimiento= DateFormat.getDateInstance().format(fecha_nacimiento);
 		
-		log(fecha_nacimiento);
-		System.out.println(fecha_nacimiento);
+		
+		SimpleDateFormat formato=new SimpleDateFormat("yyyy-MM-dd");
+	      Date fechaAux=formato.parse(fecha_nacimiento);
+	      
+	      
+	    //Date fechaAux=formato.parse.format(fecha_nacimiento);
+	    System.out.println(fechaAux.getClass().getSimpleName());
+	    System.out.println("Fecha de Nacimiento del usuario : "+fechaAux);
 	    
-		SimpleDateFormat formato=new SimpleDateFormat("dd-MM-yyyy");
-		Date fechaAux=formato.parse(fecha_nacimiento);
+	    
+	    
 		
-		List<Horoscopo> listaHoroscopo = (new HoróscopoDaoImp()).obtenerHoroscopo();
+		List<Horoscopo> listaHoroscopo = (new HoroscopoDaoImp()).obtenerHoroscopo();
+		
 		Horoscopo horoscopo = new Horoscopo();
 		
+		/*for (Horoscopo temp : listaHoroscopo) {
+			System.out.println(temp);
+			
+		}*/
+		
+		
+	Date inicio;
+	
+	
+	Date fin;
+	
 		for (Horoscopo temp : listaHoroscopo) {
-			if (fechaAux.after(temp.getFecha_Inicio())
-					&& fechaAux.before(temp.getFecha_Fin())) {
+			boolean resultado = fechaAux.after(temp.getFecha_Inicio());
+			boolean resultado2 = fechaAux.before(temp.getFecha_Fin());
+			//System.out.println("resultado "+resultado);
+			//System.out.println("resultado2"+resultado2);
+		
+			
+			inicio =formato.parse(formato.format(temp.getFecha_Inicio()));
+			fin=formato.parse(formato.format(temp.getFecha_Fin()));
+			
+			/*
+			System.out.println("Fecha inicio Horoscopo "+formato.parse(formato.format(temp.getFecha_Inicio())));
+			
+			System.out.println("Fecha fin Horoscopo "+formato.parse(formato.format(temp.getFecha_Fin())));
+			System.out.println("Fecha Nacimiento "+fechaAux);*/
+			
+			if (fechaAux.after(inicio)
+					&& fechaAux.before(fin)) {
+				System.out.println("if"+temp);
 				horoscopo = temp;
-			} else if (fechaAux.equals(temp.getFecha_Inicio())
-					|| fechaAux.equals(temp.getFecha_Fin())) {
+				
+			} else if (fechaAux.equals(inicio)
+					|| fechaAux.equals(fin)) {
+				System.out.println("else"+temp);
 				horoscopo = temp;
+				
 			}
 		}
 		
@@ -103,20 +139,17 @@ public class crearUsuario extends HttpServlet {
 		usuario.setNombre(nombre);
 		usuario.setUsername(username);
 		usuario.setEmail(email);
-		
-		
 		usuario.setFecha_nacimiento(fechaAux);
 		usuario.setPassword(password);
-		usuario.setAnimal(horoscopo.getAnimal());
-		//int id, String nombre, String username, String email, Date fecha_nacimiento, String password,
-		//String animal
+		String animal= horoscopo.getAnimal();
+		usuario.setAnimal(animal);
 		
+		//System.out.println("Este es el animal "+animal);
 		
 		UsuariosDaoImp daoUsuario = new UsuariosDaoImp();
 		try {
 			daoUsuario.guardar(usuario);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

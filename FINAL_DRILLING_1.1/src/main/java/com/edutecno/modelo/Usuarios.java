@@ -17,6 +17,13 @@ public class Usuarios {
 
 
 	
+	
+	
+
+
+
+	//Constructor cont todo
+
 	public Usuarios(int id, String nombre, String username, String email, Date fecha_nacimiento, String password,
 			String animal) {
 		super();
@@ -31,15 +38,70 @@ public class Usuarios {
 
 
 
-	public Usuarios() {
+	
+
+	
+	//id,nombre,username, email, animal
+
+	public Usuarios(int id, String nombre, String username, String email,  String animal) {
 		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.username = username;
+		this.email = email;
+		this.animal = animal;
 	}
+
+
+	//select user
 	
 
 
-	public Usuarios(String string, String string2, String string3) {
+
+	public Usuarios() {
+		super();
+	}
+
+
+
+
+
+
+	public Usuarios(int id, String nombre, String username, String email, Date fecha_nacimiento, String animal) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.username = username;
+		this.email = email;
+		this.fecha_nacimiento = fecha_nacimiento;
+		this.animal = animal;
+	}
+
+
+
+
+
+
+	public Usuarios(String nombre, String username, String email, Date fecha_nacimiento, String password) {
+		super();
+		this.nombre = nombre;
+		this.username = username;
+		this.email = email;
+		this.fecha_nacimiento = fecha_nacimiento;
+		this.password = password;
+	}
+
+
+
+
+
+
+	public Usuarios(String parameter, String parameter2, String parameter3, String parameter4, String parameter5) {
 		// TODO Auto-generated constructor stub
 	}
+
+
+
 
 
 
@@ -99,11 +161,14 @@ public class Usuarios {
 
 	
 
-	public String setAnimal(String string) {
-		return animal;
-	}
 
 	
+
+	public void setAnimal(String animal) {
+		this.animal = animal;
+	}
+
+
 
 	public int getId() {
 		return id;

@@ -20,7 +20,7 @@ public class AdministradorConexion {
 	protected ResultSet rs = null;
 
 	// Genera una conexion a la DB
-	protected Connection generaConexion() {
+	public Connection generaConexion() {
 		String usr = "final_Drilling";
 		String pwd = "123";
 		String driver = "oracle.jdbc.driver.OracleDriver";

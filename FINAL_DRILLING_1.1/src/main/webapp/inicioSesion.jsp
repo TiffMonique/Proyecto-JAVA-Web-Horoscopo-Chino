@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Registro</title>
+<title>Inicio de Sesión</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -34,6 +36,10 @@
 </nav>
 
 
+<h1 >Incio Sesión</h1>
+<p>Es necesario que inicies sesión para ver tu horóscopo Chino. Si todavia no tienes cuenta, has click <a class="navbar-brand" href="crearUsuario.jsp">aqui</a></p>
+
+
 <div class="wrapper fadeInDown">
   <div id="formContent">
     
@@ -44,30 +50,17 @@
     </div>
 
     <!-- Login Form -->
-    <form method="post" action="crearUsuario">
-    	<input type="hidden" name="operacion" id="operacion" value="crear">
-    	<label for="idUsuario" style="display: none;"> Id Usuario </label>  
-    	<input type="hidden" name="idUsuario" id="idUsuario" value="0">
-    	  
-    	<input type="text" id="nombre" class="fadeIn second" name="nombre" placeholder="Nombre">
-    	
-    	.  <input type="text" id="username" class="fadeIn second" name="username" placeholder="Nombre de usuario">
-    	
-    	<input type="email" id="email" class="fadeIn second" name="email" placeholder="Correo Electronico">
-    
-      <input type="date" id="fecha_nacimiento" class="fadeIn second" name="fecha_nacimiento" placeholder="Fecha de Nacimiento">
-     
+    <form method="post" action="login">
+      <input type="text" id="login" class="fadeIn second" name="nombre" placeholder="Nombre de usuario">
       <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña">
-      
-      <input type="password" id="repitaPassword" class="fadeIn third" name="repitaPassword" placeholder="Repita Contraseña">
-      
-      <label for="animal" style="display: none;"> Animal </label>  
-    	<input type="hidden" name="animal" id="animal" value="0">
-      
-      <input type="submit" class="fadeIn fourth" value="Ingresar" id="botonEnviar">
+      <input type="submit" class="fadeIn fourth" name="accion" value="Ingresar">
       
     </form>
 
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Olvidaste la clave?</a>
+    </div>
 
   </div>
 </div>
